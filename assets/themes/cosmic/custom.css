@@ -1,0 +1,309 @@
+/* =====================================================================
+   Quantum Computing Course — custom theme for the Jupyter Book (MyST)
+   book-theme. Palette: deep "vacuum" indigo, qubit violet, photon cyan
+   and entanglement pink.
+   ===================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Sora:wght@500;600;700;800&display=swap");
+
+/* ---------- Brand tokens ---------- */
+@property --qc-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+:root {
+  --qc-void: #07031a;
+  --qc-indigo: #1e0b4b;
+  --qc-violet: #7c3aed;
+  --qc-cyan: #22d3ee;
+  --qc-pink: #f0abfc;
+  --qc-mint: #a7f3d0;
+  --qc-grad: linear-gradient(135deg, #07031a 0%, #1e0b4b 45%, #4c1d95 75%, #0e7490 100%);
+  --qc-grad-accent: linear-gradient(90deg, #22d3ee, #a78bfa 50%, #f0abfc);
+  --qc-radius: 18px;
+
+  --phase-1: #06b6d4; /* Mathematical foundations */
+  --phase-2: #8b5cf6; /* Qubits & gates */
+  --phase-3: #ec4899; /* Circuits & protocols */
+  --phase-4: #f59e0b; /* Quantum algorithms */
+  --phase-5: #10b981; /* Real hardware & NISQ */
+  --phase-6: #f43f5e; /* Projects */
+
+  /* Override the theme's own colour variables */
+  --myst-color-primary: #6d28d9;
+  --myst-color-primary-hover: #4c1d95;
+  --myst-color-link: #6d28d9;
+  --myst-color-link-hover: #0e7490;
+  --myst-color-link-underline: #22d3ee;
+  --myst-color-active: #6d28d9;
+  --myst-color-active-bg: #7c3aed14;
+  --myst-color-code: #be185d;
+}
+.dark {
+  --myst-color-primary: #a78bfa;
+  --myst-color-primary-hover: #c4b5fd;
+  --myst-color-link: #c4b5fd;
+  --myst-color-link-hover: #67e8f9;
+  --myst-color-active: #c4b5fd;
+  --myst-color-active-bg: #a78bfa1f;
+  --myst-color-code: #f9a8d4;
+  --myst-color-bg: #0a0618;
+}
+
+.phase-1 { --phase: var(--phase-1); }
+.phase-2 { --phase: var(--phase-2); }
+.phase-3 { --phase: var(--phase-3); }
+.phase-4 { --phase: var(--phase-4); }
+.phase-5 { --phase: var(--phase-5); }
+.phase-6 { --phase: var(--phase-6); }
+
+/* ---------- Typography ---------- */
+html { scroll-behavior: smooth; }
+body { font-family: "Inter", system-ui, sans-serif; }
+h1, h2, h3, h4,
+.myst-fm-block-title,
+.hero-title,
+.myst-card-title { font-family: "Sora", "Inter", sans-serif; letter-spacing: -0.015em; }
+code, pre, kbd, .qconsole { font-family: "JetBrains Mono", ui-monospace, monospace !important; }
+::selection { background: var(--qc-pink); color: var(--qc-void); }
+
+/* Section headings sit on a small wave, like a probability amplitude */
+article h2 { position: relative; padding-bottom: 0.55rem; }
+article h2::after {
+  content: ""; position: absolute; left: 0; bottom: 0;
+  width: 4.5rem; height: 8px;
+  background: var(--qc-grad-accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 8'%3E%3Cpath d='M0 4 Q4.5 0 9 4 T18 4 T27 4 T36 4 T45 4 T54 4 T63 4 T72 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 8'%3E%3Cpath d='M0 4 Q4.5 0 9 4 T18 4 T27 4 T36 4 T45 4 T54 4 T63 4 T72 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* ---------- Top navigation ---------- */
+.myst-top-nav { border-bottom: 3px solid transparent; border-image: var(--qc-grad-accent) 1; }
+.myst-home-link { font-family: "Sora", sans-serif; font-weight: 700; }
+
+/* ---------- Sidebar ---------- */
+.myst-toc-item { transition: background 0.15s, transform 0.15s; }
+.myst-toc-item:hover { transform: translateX(3px); }
+.myst-toc-item.active {
+  font-weight: 600;
+  border-left: 4px solid var(--myst-color-active);
+  border-radius: 0 0.6rem 0.6rem 0;
+}
+.sidebar-footer p {
+  display: inline-block; margin: 0; padding: 0.35rem 0.8rem;
+  font-size: 0.8rem; border-radius: 999px;
+  background: var(--myst-color-active-bg); color: var(--myst-color-text-secondary);
+}
+
+/* ---------- Home: hero ---------- */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  margin-top: 0.75rem; padding: 1.6rem 1.75rem;
+  border-radius: 18px; color: #e2e8f0;
+  background:
+    radial-gradient(ellipse at 88% 10%, #22d3ee38 0, transparent 45%),
+    radial-gradient(ellipse at 60% 110%, #f0abfc2e 0, transparent 50%),
+    radial-gradient(circle at 8% 85%, #7c3aed4d 0, transparent 45%),
+    var(--qc-grad);
+  box-shadow: 0 18px 44px -22px #4c1d95cc;
+}
+/* Starfield: two dot layers that twinkle out of phase */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    radial-gradient(#ffffff 0.8px, transparent 1.2px),
+    radial-gradient(#c4b5fd 0.7px, transparent 1.1px);
+  background-size: 34px 34px, 53px 53px;
+  background-position: 0 0, 17px 23px;
+  opacity: 0.35;
+  animation: qc-twinkle 5s ease-in-out infinite alternate;
+}
+/* Orbital ring with a photon travelling round it */
+.hero::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  right: -6%; top: 50%; width: 62%; aspect-ratio: 3 / 1;
+  translate: 0 -50%; rotate: -16deg;
+  border-radius: 50%;
+  background: conic-gradient(from var(--qc-angle), transparent 0 70%, #22d3ee55 82%, #f0abfc 96%, transparent 97%);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 3px), #000 calc(100% - 2px), #000 100%, transparent 100%);
+          mask: radial-gradient(closest-side, transparent calc(100% - 3px), #000 calc(100% - 2px), #000 100%, transparent 100%);
+  outline: 1px solid transparent;
+  box-shadow: inset 0 0 0 1px #ffffff12;
+  animation: qc-orbit 7s linear infinite;
+}
+.hero > .myst-grid { position: relative; align-items: center; margin: 0; gap: 1.5rem; }
+@media (min-width: 1024px) { .hero > .myst-grid { grid-template-columns: 1.35fr 1fr; } }
+.hero p { color: #cbd5e1; margin: 0.4rem 0; font-size: 0.95rem; }
+.hero code { color: var(--qc-mint); background: #ffffff14; }
+.hero .katex { color: var(--qc-cyan); }
+.hero-kicker p {
+  display: inline-block; margin: 0 0 0.6rem; padding: 0.15rem 0.75rem;
+  border: 1px solid #ffffff33; border-radius: 999px; white-space: nowrap;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--qc-cyan) !important; background: #22d3ee12;
+}
+.hero-title p {
+  margin: 0 0 0.45rem; color: #fff !important;
+  font-family: "Sora", sans-serif; font-weight: 800;
+  font-size: clamp(1.55rem, 2.7vw, 2.1rem); line-height: 1.15;
+}
+.hero-title em {
+  font-style: normal;
+  background: var(--qc-grad-accent); background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: qc-shimmer 6s ease-in-out infinite alternate;
+}
+.hero-text p:has(.button) { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+.hero .button {
+  margin: 0; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.85rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.hero .link.button {
+  background: linear-gradient(90deg, #22d3ee, #a78bfa); color: var(--qc-void); font-weight: 600;
+}
+.hero span .button { background: transparent; color: #fff; border: 1px solid #ffffff66; }
+.hero .button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px -8px #22d3eeaa; }
+
+/* Quantum console (the hero's right column) */
+.qconsole {
+  position: relative; padding: 2.1rem 1rem 0.9rem;
+  border-radius: 14px; border: 1px solid #a78bfa40;
+  background: #07031acc; backdrop-filter: blur(6px);
+  box-shadow: 0 16px 34px -16px #000d, 0 0 0 1px #22d3ee14, 0 0 40px -18px #7c3aed;
+  font-size: 0.8rem;
+}
+.qconsole::before {
+  content: "⚛  quantum_console"; position: absolute; top: 0.55rem; left: 1rem; right: 1rem;
+  padding-bottom: 0.4rem; border-bottom: 1px solid #ffffff14;
+  font-size: 0.68rem; letter-spacing: 0.08em; color: #a78bfa;
+}
+.qconsole p { margin: 0.18rem 0; font-size: inherit; opacity: 0; animation: qc-type-in 0.4s ease forwards; }
+.qconsole p:nth-child(1) { animation-delay: 0.2s; }
+.qconsole p:nth-child(2) { animation-delay: 0.9s; }
+.qconsole p:nth-child(3) { animation-delay: 1.6s; }
+.qconsole p:nth-child(4) { animation-delay: 2.4s; }
+.qconsole code { background: none !important; padding: 0; color: var(--qc-mint) !important; font-size: inherit; }
+/* The measured state "collapses" in with a glow */
+.qconsole p:last-child {
+  margin-top: 0.55rem; padding: 0.35rem 0.6rem; border-radius: 8px;
+  background: linear-gradient(90deg, #22d3ee1f, #f0abfc1f);
+  border: 1px solid #f0abfc33;
+}
+.qconsole p:last-child code { color: var(--qc-pink) !important; font-weight: 600; }
+.qconsole p:last-child::after {
+  content: "▋"; margin-left: 0.35rem; color: var(--qc-cyan);
+  animation: qc-blink 1s steps(1) infinite;
+}
+
+@keyframes qc-type-in { from { opacity: 0; transform: translateX(-6px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes qc-blink { 50% { opacity: 0; } }
+@keyframes qc-twinkle { from { opacity: 0.2; } to { opacity: 0.45; } }
+@keyframes qc-orbit { to { --qc-angle: 360deg; } }
+@keyframes qc-shimmer { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+/* ---------- Home: roadmap, drawn as quantum wires ---------- */
+/* Phase headings carry their basis-state label */
+article h3:has(+ p + .roadmap-grid)::after,
+article h3:has(+ .roadmap-grid)::after {
+  display: inline-block; margin-left: 0.6rem; padding: 0.1rem 0.55rem;
+  vertical-align: 0.2em; border-radius: 999px;
+  font: 600 0.72rem "JetBrains Mono", monospace; letter-spacing: 0;
+  color: #fff; background: var(--qc-violet);
+}
+article h3:has(+ p + .roadmap-grid.phase-1)::after { content: "|000⟩"; background: var(--phase-1); }
+article h3:has(+ p + .roadmap-grid.phase-2)::after { content: "|001⟩"; background: var(--phase-2); }
+article h3:has(+ p + .roadmap-grid.phase-3)::after { content: "|010⟩"; background: var(--phase-3); }
+article h3:has(+ p + .roadmap-grid.phase-4)::after { content: "|011⟩"; background: var(--phase-4); }
+article h3:has(+ p + .roadmap-grid.phase-5)::after { content: "|100⟩"; background: var(--phase-5); }
+article h3:has(+ p + .roadmap-grid.phase-6)::after { content: "|101⟩"; background: var(--phase-6); }
+
+.roadmap-grid {
+  position: relative; margin-top: 0.5rem !important;
+  padding-left: 1.5rem;
+  border-left: 2px solid color-mix(in srgb, var(--phase) 70%, transparent);
+}
+/* The wire starts at a qubit "gate" box */
+.roadmap-grid::before {
+  content: ""; position: absolute; left: -9px; top: -4px; width: 16px; height: 16px;
+  border-radius: 4px; background: var(--phase);
+  box-shadow: 0 0 0 4px var(--myst-color-bg), 0 0 14px 2px color-mix(in srgb, var(--phase) 60%, transparent);
+}
+.roadmap-grid .myst-card {
+  position: relative; overflow: hidden;
+  margin: 0 !important; border-radius: 14px !important;
+  border-top: 4px solid var(--phase) !important;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+/* Interference sheen sweeps across on hover */
+.roadmap-grid .myst-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--phase) 16%, transparent) 50%, transparent 65%);
+  translate: -100% 0; transition: translate 0.6s ease;
+}
+.roadmap-grid .myst-card:hover::after { translate: 100% 0; }
+.roadmap-grid .myst-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px -18px var(--phase), 0 0 0 1px color-mix(in srgb, var(--phase) 35%, transparent);
+}
+.roadmap-grid .myst-card-title { text-decoration: none !important; }
+.roadmap-grid .myst-card p { color: var(--myst-color-text-secondary); font-size: 0.92rem; }
+
+/* ---------- Lecture pages ---------- */
+.lecture-banner {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 0 0 2rem; padding: 1rem 1.25rem; border-radius: var(--qc-radius);
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--phase) 14%, transparent), transparent 40%),
+    linear-gradient(120deg, color-mix(in srgb, var(--phase) 18%, transparent), transparent 70%);
+  border: 1px solid color-mix(in srgb, var(--phase) 35%, transparent);
+}
+/* The lecture number is written as a ket: |05⟩ */
+.lecture-number p {
+  margin: 0; min-width: 4.6rem; height: 3.5rem; padding: 0 0.7rem;
+  display: flex; justify-content: center; align-items: center;
+  border-radius: 14px; background: var(--phase); color: #fff;
+  font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 1.3rem;
+  box-shadow: 0 10px 22px -10px var(--phase), inset 0 0 0 1px #ffffff2e;
+}
+.lecture-number p::before { content: "|"; opacity: 0.7; margin-right: 0.08em; }
+.lecture-number p::after { content: "⟩"; opacity: 0.7; margin-left: 0.04em; }
+.lecture-info p { margin: 0; color: var(--myst-color-text-secondary); }
+.lecture-info strong { color: var(--phase); }
+
+/* Learning objectives: list bullets become qubits */
+article h2 + ul { list-style: none !important; padding-left: 0.2rem !important; }
+article h2 + ul > li { position: relative; list-style: none !important; padding-left: 1.6rem !important; }
+article h2 + ul > li::before {
+  content: ""; position: absolute; left: 0.1rem; top: 0.5em;
+  width: 0.7rem; height: 0.7rem; border-radius: 50%;
+  border: 2px solid var(--myst-color-primary);
+  background: radial-gradient(circle at 35% 35%, var(--qc-cyan), transparent 60%);
+}
+
+/* Unwritten sections are "still in superposition" */
+.coming-soon p {
+  position: relative;
+  margin: 0.5rem 0 1.5rem; padding: 0.9rem 1.1rem; border-radius: 12px;
+  border: 2px dashed color-mix(in srgb, var(--myst-color-primary) 35%, var(--myst-color-border));
+  color: var(--myst-color-text-tertiary); font-style: italic;
+  background: linear-gradient(100deg, transparent 30%, #a78bfa14 50%, transparent 70%) 0 0 / 250% 100%;
+  animation: qc-shimmer 4s ease-in-out infinite alternate;
+}
+.coming-soon p::before { content: "🌀 "; font-style: normal; }
+
+/* ---------- Footer ---------- */
+footer.footer { background: var(--qc-grad) !important; color: #cbd5e1; }
+.site-footer strong { color: #fff; font-family: "Sora", sans-serif; }
+.site-footer a { color: var(--qc-cyan) !important; }
+.site-footer code { color: var(--qc-mint); background: #ffffff14; }
+.footer-bottom p {
+  margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #ffffff22;
+  font-size: 0.8rem; color: #94a3b8;
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .qconsole p { opacity: 1; }
+}

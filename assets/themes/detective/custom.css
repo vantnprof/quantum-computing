@@ -1,0 +1,360 @@
+/* =====================================================================
+   Quantum Computing Course — "Detective case file" theme for the
+   Jupyter Book (MyST) book-theme.
+   Navy and crimson, manila case files, a cork evidence board with red
+   string, typewriter notes and "SOLVED" stamps. Every lecture is a case.
+   ===================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@500;600;700&family=Special+Elite&display=swap");
+
+/* ---------- Tokens ---------- */
+:root {
+  --dt-navy: #14274e;
+  --dt-blue: #1f3a68;
+  --dt-red: #d62839;
+  --dt-red-deep: #a61b2b;
+  --dt-gold: #ffd166;
+  --dt-manila: #f3e7c9;
+  --dt-manila-edge: #dcc89a;
+  --dt-ink: #1b2233;
+  --dt-cork: #b98b5b;
+  --dt-cork-dot: #9c7246;
+  --dt-radius: 10px;
+  --dt-type: "Special Elite", "Courier New", monospace;
+
+  --phase-1: #2c5aa0; /* Foundations          */
+  --phase-2: #d62839; /* Qubits & gates       */
+  --phase-3: #2a9d8f; /* Circuits & protocols */
+  --phase-4: #e09f1f; /* Algorithms           */
+  --phase-5: #6c4ab6; /* Real hardware        */
+  --phase-6: #14274e; /* Projects             */
+
+  /* Override the theme's own colour variables */
+  --myst-color-primary: #1f3a68;
+  --myst-color-primary-hover: #d62839;
+  --myst-color-link: #1f4e9a;
+  --myst-color-link-hover: #d62839;
+  --myst-color-link-underline: #d62839;
+  --myst-color-active: #d62839;
+  --myst-color-active-bg: #d628390f;
+  --myst-color-code: #a61b2b;
+}
+.dark {
+  --dt-cork: #5b4330;
+  --dt-cork-dot: #4a3626;
+  --phase-1: #6b9be0;
+  --phase-6: #8aa6d6;
+  --myst-color-bg: #0b1222;
+  --myst-color-primary: #7fa6e6;
+  --myst-color-primary-hover: #ff5d6c;
+  --myst-color-link: #9cc0ff;
+  --myst-color-link-hover: #ff7a86;
+  --myst-color-active: #ff5d6c;
+  --myst-color-active-bg: #ff5d6c1a;
+  --myst-color-code: #ff9aa4;
+}
+
+.phase-1 { --phase: var(--phase-1); }
+.phase-2 { --phase: var(--phase-2); }
+.phase-3 { --phase: var(--phase-3); }
+.phase-4 { --phase: var(--phase-4); }
+.phase-5 { --phase: var(--phase-5); }
+.phase-6 { --phase: var(--phase-6); }
+
+/* ---------- Typography ---------- */
+html { scroll-behavior: smooth; }
+body { font-family: "Inter", system-ui, sans-serif; }
+h1, h2, h3, h4,
+.myst-fm-block-title,
+.hero-title,
+.myst-card-title { font-family: "Oswald", "Inter", sans-serif; letter-spacing: 0.01em; }
+code, pre, kbd { font-family: "JetBrains Mono", ui-monospace, monospace !important; }
+::selection { background: var(--dt-gold); color: var(--dt-ink); }
+
+/* Section headings: a strip of crime-scene tape */
+article h2 { position: relative; padding-bottom: 0.6rem; }
+article h2::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 4.5rem; height: 6px;
+  background: repeating-linear-gradient(-45deg, var(--dt-red) 0 6px, var(--dt-gold) 6px 12px);
+  border-radius: 1px;
+}
+
+/* ---------- Top navigation ---------- */
+.myst-top-nav { border-bottom: 3px solid var(--dt-red); }
+.myst-home-link { font-family: "Oswald", sans-serif; font-weight: 700; letter-spacing: 0.03em; }
+
+/* ---------- Sidebar ---------- */
+.myst-toc-item { transition: background 0.15s, transform 0.15s; }
+.myst-toc-item:hover { transform: translateX(3px); }
+.myst-toc-item.active {
+  font-weight: 600;
+  border-left: 4px solid var(--myst-color-active);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+.sidebar-footer p {
+  display: inline-block; margin: 0; padding: 0.35rem 0.8rem;
+  font: 0.8rem var(--dt-type); border-radius: 4px;
+  background: var(--dt-manila); color: var(--dt-ink);
+  box-shadow: 2px 2px 0 var(--dt-manila-edge);
+}
+
+/* ---------- Home: hero (a night-time case briefing) ---------- */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  margin-top: 0.75rem; padding: 1.6rem 1.75rem;
+  border-radius: var(--dt-radius); color: #e6ecf7;
+  background: linear-gradient(135deg, #0b1630 0%, #14274e 55%, #1f3a68 100%);
+  box-shadow: 0 18px 40px -22px #0b1630cc;
+  border-bottom: 4px solid var(--dt-red);
+}
+/* A searchlight sweeping across a city-map grid */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(circle 160px at var(--spot, 30%) 40%, #ffd16626, transparent 70%),
+    linear-gradient(#ffffff0a 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(90deg, #ffffff0a 1px, transparent 1px) 0 0 / 28px 28px;
+  animation: dt-search 12s ease-in-out infinite alternate;
+}
+@property --spot { syntax: "<percentage>"; inherits: false; initial-value: 30%; }
+/* The magnifying glass, hovering over the evidence */
+.hero::after {
+  content: ""; position: absolute; z-index: 1; pointer-events: none;
+  right: -22px; bottom: -52px; width: 140px; aspect-ratio: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E %3Cdefs%3E %3CradialGradient id='lens' cx='.4' cy='.35' r='.7'%3E %3Cstop offset='0' stop-color='%23cfe8ff' stop-opacity='.28'/%3E %3Cstop offset='1' stop-color='%237fb2e5' stop-opacity='.08'/%3E %3C/radialGradient%3E %3ClinearGradient id='wood' x1='0' y1='0' x2='1' y2='1'%3E %3Cstop offset='0' stop-color='%238a4b2a'/%3E%3Cstop offset='1' stop-color='%234e2914'/%3E %3C/linearGradient%3E %3ClinearGradient id='rim' x1='0' y1='0' x2='1' y2='1'%3E %3Cstop offset='0' stop-color='%23f6dd8b'/%3E%3Cstop offset='.5' stop-color='%23c9a227'/%3E%3Cstop offset='1' stop-color='%238d6e12'/%3E %3C/linearGradient%3E %3C/defs%3E %3Cg transform='rotate(-8 100 100)'%3E %3Cline x1='128' y1='128' x2='182' y2='182' stroke='url(%23wood)' stroke-width='20' stroke-linecap='round'/%3E %3Cline x1='122' y1='122' x2='136' y2='136' stroke='url(%23rim)' stroke-width='16' stroke-linecap='butt'/%3E %3Ccircle cx='82' cy='82' r='58' fill='url(%23lens)' stroke='url(%23rim)' stroke-width='11'/%3E %3Ccircle cx='82' cy='82' r='52' fill='none' stroke='%23ffffff40' stroke-width='1.5'/%3E %3Cpath d='M45 62 A42 42 0 0 1 70 37' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' opacity='.55'/%3E %3Ctext x='82' y='96' text-anchor='middle' font-family='Georgia, serif' font-size='40' font-style='italic' fill='%23ffd166' opacity='.85'%3E%7C%26%23968;%26%2310217;%3C/text%3E %3C/g%3E %3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 12px 14px #0009);
+  animation: dt-hover 6s ease-in-out infinite;
+}
+.hero > .myst-grid { position: relative; align-items: center; margin: 0; gap: 1.5rem; }
+@media (min-width: 1024px) { .hero > .myst-grid.myst-grid { grid-template-columns: 1.2fr 1fr; } }
+.hero p { color: #c6d1e6; margin: 0.4rem 0; font-size: 0.95rem; }
+.hero code { color: var(--dt-gold); background: #ffffff14; }
+.hero .katex { color: var(--dt-gold); }
+.hero-kicker p {
+  display: inline-block; margin: 0 0 0.7rem; padding: 0.15rem 0.7rem;
+  border: 1.5px solid var(--dt-red); border-radius: 3px; white-space: nowrap;
+  font: 0.72rem var(--dt-type); letter-spacing: 0.14em; text-transform: uppercase;
+  color: #ffb3ba !important; background: #d6283914;
+}
+.hero-kicker p::before { content: "Case file · "; color: #fff; }
+.hero-title p {
+  margin: 0 0 0.5rem; color: #fff !important;
+  font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem); line-height: 1.12; letter-spacing: 0.01em;
+}
+/* The key word is circled in red marker, like a clue */
+.hero-title em { position: relative; font-style: normal; color: var(--dt-gold); white-space: nowrap; }
+.hero-title em::after {
+  content: ""; position: absolute; inset: -0.12em -0.3em -0.08em -0.25em;
+  border: 2.5px solid var(--dt-red); border-radius: 50% 45% 55% 48% / 60% 50% 55% 45%;
+  rotate: -3deg; pointer-events: none;
+  clip-path: inset(0 100% 0 0); animation: dt-circle 0.9s ease-out 0.6s forwards;
+}
+.hero-text p:has(.button) { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.hero .button {
+  margin: 0; padding: 0.42rem 1.05rem; border-radius: 4px; font-size: 0.85rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.hero .link.button { background: var(--dt-red); color: #fff; font-weight: 600; }
+.hero span .button { background: transparent; color: #fff; border: 1px solid #ffffff66; }
+.hero .button:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -8px #000c; }
+
+/* Case notes: a typewritten sheet clipped into the file */
+.qconsole {
+  position: relative; padding: 2.2rem 1rem 1rem 1.1rem;
+  border-radius: 3px; color: var(--dt-ink);
+  background:
+    repeating-linear-gradient(transparent 0 1.55rem, #c9b68a66 1.55rem calc(1.55rem + 1px)) 0 1.95rem / 100% auto no-repeat,
+    var(--dt-manila);
+  box-shadow: 0 16px 30px -14px #000d, 3px 3px 0 var(--dt-manila-edge);
+  rotate: 1.2deg;
+  font-size: 0.78rem;
+}
+.qconsole::before {
+  content: "Case notes · Experiment 001"; position: absolute; top: 0.6rem; left: 1.1rem; right: 1rem;
+  padding-bottom: 0.35rem; border-bottom: 2px solid var(--dt-red);
+  font: 0.72rem var(--dt-type); letter-spacing: 0.08em; text-transform: uppercase; color: var(--dt-red-deep);
+}
+/* Paper clip */
+.qconsole::after {
+  content: ""; position: absolute; top: -0.7rem; right: 1.4rem; width: 0.8rem; height: 2.2rem;
+  border: 2.5px solid #8a94a6; border-radius: 0.5rem; background: transparent;
+}
+.qconsole p { margin: 0.15rem 0; font-size: inherit; white-space: nowrap; opacity: 0; animation: dt-type-in 0.45s ease forwards; }
+.qconsole p:nth-child(1) { animation-delay: 0.2s; }
+.qconsole p:nth-child(2) { animation-delay: 0.9s; }
+.qconsole p:nth-child(3) { animation-delay: 1.6s; }
+.qconsole p:nth-child(4) { animation-delay: 2.4s; }
+.qconsole code { background: none !important; padding: 0; color: var(--dt-ink) !important; font: inherit; font-family: var(--dt-type) !important; }
+/* The result, with a SOLVED stamp */
+.qconsole p:last-child { position: relative; margin-top: 0.5rem; padding-right: 4.8rem; }
+.qconsole p:last-child code { color: var(--dt-red-deep) !important; font-weight: 700; }
+.qconsole p:last-child::after {
+  content: "Solved"; position: absolute; right: 0; top: 50%;
+  padding: 0.05rem 0.45rem; border: 2px solid var(--dt-red); border-radius: 3px;
+  font: 0.78rem var(--dt-type); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dt-red);
+  translate: 0 -50%; rotate: -12deg; opacity: 0;
+  animation: dt-stamp 0.4s ease-out 3.1s forwards;
+}
+
+@keyframes dt-type-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+@keyframes dt-stamp {
+  0% { opacity: 0; scale: 2; }
+  70% { opacity: 0.95; scale: 0.92; }
+  100% { opacity: 0.9; scale: 1; }
+}
+@keyframes dt-circle { to { clip-path: inset(0 0 0 0); } }
+@keyframes dt-search { from { --spot: 15%; } to { --spot: 85%; } }
+@keyframes dt-hover {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  50% { translate: -14px -10px; rotate: -6deg; }
+}
+
+/* ---------- Home: roadmap as an evidence board ---------- */
+/* Phase headings get a typed file tag with their basis state */
+article h3:has(+ p + .roadmap-grid)::after {
+  display: inline-block; margin-left: 0.7rem; padding: 0.1rem 0.5rem;
+  vertical-align: 0.2em; border-radius: 3px;
+  font: 0.75rem var(--dt-type); letter-spacing: 0.04em;
+  color: var(--dt-ink); background: var(--dt-manila); box-shadow: 2px 2px 0 var(--dt-manila-edge);
+}
+article h3:has(+ p + .roadmap-grid.phase-1)::after { content: "File |000⟩"; }
+article h3:has(+ p + .roadmap-grid.phase-2)::after { content: "File |001⟩"; }
+article h3:has(+ p + .roadmap-grid.phase-3)::after { content: "File |010⟩"; }
+article h3:has(+ p + .roadmap-grid.phase-4)::after { content: "File |011⟩"; }
+article h3:has(+ p + .roadmap-grid.phase-5)::after { content: "File |100⟩"; }
+article h3:has(+ p + .roadmap-grid.phase-6)::after { content: "File |101⟩"; }
+
+/* Cork board, with red string running down the left edge */
+.roadmap-grid {
+  position: relative; margin-top: 0.5rem !important;
+  padding: 1.6rem 1.2rem 1.3rem 1.6rem; border-radius: 8px;
+  background:
+    radial-gradient(var(--dt-cork-dot) 1.2px, transparent 1.6px) 0 0 / 11px 11px,
+    radial-gradient(var(--dt-cork-dot) 1px, transparent 1.4px) 5px 6px / 13px 13px,
+    var(--dt-cork);
+  box-shadow: inset 0 0 0 6px #6b4a2b, inset 0 0 18px #0005;
+}
+.roadmap-grid::before {
+  content: ""; position: absolute; left: 0.8rem; top: 1rem; bottom: 1rem; width: 0;
+  border-left: 2px dashed var(--dt-red);
+  filter: drop-shadow(1px 1px 0 #0004);
+}
+
+/* Each case is a manila card pinned to the board */
+.roadmap-grid .myst-card {
+  position: relative; overflow: visible !important;
+  margin: 0 !important; border-radius: 3px !important;
+  border: none !important; border-bottom: 4px solid var(--phase) !important;
+  background: var(--dt-manila) !important; color: var(--dt-ink);
+  box-shadow: 0 10px 18px -10px #0009 !important;
+  rotate: -1.2deg;
+  transition: rotate 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.roadmap-grid .myst-card:nth-child(even) { rotate: 1deg; }
+.roadmap-grid .myst-card:nth-child(3n) { rotate: -0.4deg; }
+/* Push-pin */
+.roadmap-grid .myst-card::before {
+  content: ""; position: absolute; top: -7px; left: 50%; translate: -50% 0; z-index: 1;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffffcc 0 2px, var(--phase) 3px 100%);
+  box-shadow: 1px 3px 3px #0007;
+}
+.roadmap-grid .myst-card:hover {
+  rotate: 0deg; transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 28px -14px #000b !important;
+}
+.roadmap-grid .myst-card-title { text-decoration: none !important; color: var(--dt-ink) !important; font-weight: 600; }
+/* Four-case phases are pinned as a 2 × 2 board instead of four narrow columns */
+@media (min-width: 1280px) {
+  .roadmap-grid.xl\:grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.roadmap-grid .myst-card p { color: #3d4658 !important; font-size: 0.92rem; }
+
+/* ---------- Lecture pages: each lecture is a case file ---------- */
+.lecture-banner {
+  position: relative;
+  display: flex; align-items: center; gap: 1rem;
+  margin: 1rem 0 2rem; padding: 1rem 1.25rem; border-radius: 0 var(--dt-radius) var(--dt-radius) var(--dt-radius);
+  background: var(--dt-manila); color: var(--dt-ink);
+  box-shadow: 4px 4px 0 var(--dt-manila-edge);
+  border-left: 5px solid var(--phase);
+}
+/* Folder tab */
+.lecture-banner::before {
+  content: "Case file"; position: absolute; left: -5px; top: -1.45rem; height: 1.45rem;
+  padding: 0.2rem 0.9rem 0; border-radius: 8px 8px 0 0;
+  background: var(--dt-manila); border-left: 5px solid var(--phase);
+  font: 0.7rem var(--dt-type); letter-spacing: 0.12em; text-transform: uppercase; color: #6b5a33;
+}
+/* Confidential stamp */
+.lecture-banner::after {
+  content: "Confidential"; position: absolute; right: 1.1rem; top: 50%; translate: 0 -50%;
+  padding: 0.1rem 0.5rem; border: 2px solid #d6283999; border-radius: 3px;
+  font: 0.8rem var(--dt-type); letter-spacing: 0.14em; text-transform: uppercase; color: #d62839b3;
+  rotate: -8deg;
+}
+.lecture-number p {
+  margin: 0; min-width: 4rem; height: 3.6rem; padding: 0 0.6rem;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  border-radius: 6px; background: var(--dt-navy); color: #fff;
+  font: 700 1.45rem/1 "Oswald", sans-serif;
+  box-shadow: 0 8px 16px -8px #000a;
+}
+.lecture-number p::before { content: "Case"; margin-bottom: 0.2rem; font: 0.58rem var(--dt-type); letter-spacing: 0.16em; text-transform: uppercase; color: var(--dt-gold); }
+.lecture-info p { margin: 0; color: #4a5468 !important; }
+.lecture-info strong { color: var(--dt-red-deep); font-family: "Oswald", sans-serif; letter-spacing: 0.02em; }
+@media (max-width: 640px) { .lecture-banner::after { display: none; } }
+
+/* Learning objectives: a list of clues, each marked by a tiny magnifying glass */
+article h2 + ul { list-style: none !important; padding-left: 0.2rem !important; }
+article h2 + ul > li { position: relative; list-style: none !important; padding-left: 1.7rem !important; }
+article h2 + ul > li::before {
+  content: ""; position: absolute; left: 0.15rem; top: 0.42em;
+  width: 0.62rem; height: 0.62rem; border-radius: 50%;
+  border: 2px solid var(--myst-color-primary); background: #ffd16633;
+}
+article h2 + ul > li::after {
+  content: ""; position: absolute; left: 0.78rem; top: 1.02em;
+  width: 0.38rem; height: 2.5px; border-radius: 2px; background: var(--dt-red); rotate: 45deg;
+}
+
+/* Unwritten sections are still open cases */
+.coming-soon p {
+  display: flex; align-items: center; gap: 0.9rem;
+  margin: 0.5rem 0 1.5rem; padding: 0.85rem 1.1rem; border-radius: 4px;
+  background: var(--dt-manila); color: #5b5340 !important;
+  font-family: var(--dt-type); box-shadow: 3px 3px 0 var(--dt-manila-edge);
+}
+.coming-soon p::before {
+  content: "Unsolved"; flex: none; padding: 0.1rem 0.45rem;
+  border: 2px solid var(--dt-red); border-radius: 3px; color: var(--dt-red);
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; rotate: -6deg;
+}
+
+/* ---------- Footer ---------- */
+footer.footer {
+  background: linear-gradient(135deg, #0b1630, #14274e) !important; color: #c6d1e6;
+  border-top: 4px solid transparent;
+  border-image: repeating-linear-gradient(-45deg, var(--dt-red) 0 10px, var(--dt-gold) 10px 20px) 4;
+}
+.site-footer strong { color: #fff; font-family: "Oswald", sans-serif; letter-spacing: 0.03em; }
+.site-footer a { color: var(--dt-gold) !important; }
+.site-footer code { color: var(--dt-gold); background: #ffffff14; }
+.footer-bottom p {
+  margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #ffffff22;
+  font-size: 0.8rem; color: #8d9ab3;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 640px) {
+  .hero::after { width: 100px; bottom: -24px; }
+  .qconsole { rotate: 0deg; }
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .qconsole p { opacity: 1; }
+  .qconsole p:last-child::after { opacity: 0.9; }
+  .hero-title em::after { clip-path: none; }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Quantum Computing Course logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f3a68"/><stop offset="1" stop-color="#2c5aa0"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#g)"/>
+  <!-- magnifying glass -->
+  <line x1="38.5" y1="38.5" x2="52" y2="52" stroke="#d62839" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="27" cy="27" r="15.5" fill="#ffffff1f" stroke="#f3e7c9" stroke-width="4.5"/>
+  <!-- a qubit inside the lens -->
+  <ellipse cx="27" cy="27" rx="10" ry="3.4" fill="none" stroke="#f3e7c9" stroke-width="1.2" opacity=".6"/>
+  <line x1="27" y1="27" x2="33" y2="20" stroke="#ffd166" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="33" cy="20" r="2.8" fill="#ffd166"/>
+  <circle cx="27" cy="27" r="1.6" fill="#f3e7c9"/>
+  <path d="M17.5 21 A11 11 0 0 1 23 16.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+</svg>

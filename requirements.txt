@@ -1,0 +1,11 @@
+# Website
+jupyter-book>=2.0
+ipykernel
+jupytext
+
+# Quantum stack used in lectures
+numpy
+matplotlib
+qiskit
+qiskit-aer
+pylatexenc

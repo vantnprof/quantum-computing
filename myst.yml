@@ -1,0 +1,65 @@
+# Jupyter Book 2 configuration — see https://jupyterbook.org
+version: 1
+project:
+  id: quantum-computing-course
+  title: Quantum Computing Course
+  description: A hands-on introduction to quantum computing — from qubits and gates to algorithms and real quantum hardware.
+  keywords: [quantum computing, qubits, qiskit, quantum algorithms, course, jupyter]
+  authors:
+    - name: Van Tien Nguyen
+  license: CC-BY-4.0
+  jupyter: true
+  math:
+    '\ket': '\left|#1\right\rangle'
+    '\bra': '\left\langle#1\right|'
+    '\braket': '\left\langle#1\middle|#2\right\rangle'
+  toc:
+    - file: index.md
+    - file: lectures/00-linear-algebra/index.md
+    - file: lectures/01-dirac-notation/index.md
+    - file: lectures/02-python-for-quantum/index.md
+    - file: lectures/03-qubits-bloch-sphere/index.md
+    - file: lectures/04-single-qubit-gates/index.md
+    - file: lectures/05-measurement/index.md
+    - file: lectures/06-entanglement/index.md
+    - file: lectures/07-quantum-circuits-qiskit/index.md
+    - file: lectures/08-teleportation-superdense/index.md
+    - file: lectures/09-no-cloning-qkd/index.md
+    - file: lectures/10-deutsch-jozsa/index.md
+    - file: lectures/11-grover-search/index.md
+    - file: lectures/12-qft-phase-estimation/index.md
+    - file: lectures/13-shor-algorithm/index.md
+    - file: lectures/14-noise-error-correction/index.md
+    - file: lectures/15-variational-algorithms/index.md
+    - file: lectures/16-real-hardware/index.md
+    - file: lectures/17-project-1/index.md
+    - file: lectures/18-project-2/index.md
+site:
+  template: book-theme
+  title: Quantum Computing Course
+  nav:
+    - title: 🗺️ Roadmap
+      url: /#roadmap
+    - title: 🚀 Projects
+      children:
+        - title: 🎯 Project 1
+          url: /lectures/project-1
+        - title: 🏆 Project 2
+          url: /lectures/project-2
+  actions:
+    - title: ⚛ Start learning
+      url: /lectures/linear-algebra
+  parts:
+    footer: parts/footer.md
+    primary_sidebar_footer: parts/sidebar-footer.md
+  # Theme: replace "detective" with "cosmic" in the four paths below to switch the look.
+  #   detective — navy & crimson case files, cork evidence board, magnifying glass, SOLVED stamps
+  #   cosmic    — deep-space violet/cyan, starfield hero, glowing orbit
+  options:
+    logo: assets/themes/detective/logo.svg
+    logo_dark: assets/themes/detective/logo-dark.svg
+    logo_text: Quantum Course
+    favicon: assets/themes/detective/favicon.png
+    style: assets/themes/detective/custom.css
+    folders: true
+    outline_maxdepth: 2
